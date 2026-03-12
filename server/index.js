@@ -16,7 +16,8 @@ const allowedOrigins = (process.env.CORS_ORIGINS || '')
     'http://localhost:3000',
     'https://enerstore.vercel.app',
     'https://ener-store-6csp.vercel.app',
-    'https://enerstore-production-ce91.up.railway.app'
+    'https://enerstore-production-ce91.up.railway.app',
+    'https://it-camer.mn'
   ]);
 
 const corsOptions = {
@@ -50,7 +51,8 @@ const io = new Server(server, {
       'http://localhost:3000',
       'https://enerstore.vercel.app',
       'https://ener-store-6csp.vercel.app',
-      'https://enerstore-production.up.railway.app'
+      'https://enerstore-production-ce91.up.railway.app',
+      'https://it-camer.mn'
     ],
     credentials: true,
     methods: ["GET", "POST"]
