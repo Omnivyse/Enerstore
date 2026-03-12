@@ -6,20 +6,26 @@ require('dotenv').config();
 const app = express();
 
 // CORS configuration for production and development
+// Prefer environment-driven origins so we don't have to change code for each deployment URL.
+const allowedOrigins = (process.env.CORS_ORIGINS || '')
+  .split(',')
+  .map(o => o.trim())
+  .filter(Boolean)
+  .concat([
+    // sensible defaults
+    'http://localhost:3000',
+    'https://enerstore.vercel.app',
+    'https://ener-store-6csp.vercel.app',
+    'https://enerstore-production-ce91.up.railway.app'
+  ]);
+
 const corsOptions = {
   origin: function (origin, callback) {
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-    
-    const allowedOrigins = [
-      'http://localhost:3000',
-      'https://enerstore.vercel.app',
-      'https://ener-store-6csp.vercel.app',
-      'https://enerstore-production.up.railway.app'
-    ];
-    
+
     // Check if origin is allowed
-    if (allowedOrigins.indexOf(origin) !== -1) {
+    if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       console.log('CORS blocked origin:', origin);
