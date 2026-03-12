@@ -1,7 +1,8 @@
 // API Configuration
 // Prefer environment variable so we can point to the actual deployed backend URL.
-// Fallback keeps the previous default for local/dev if env is not set.
-const RAILWAY_URL = process.env.REACT_APP_API_BASE_URL || 'https://enerstore-production.up.railway.app';
+// Normalize to avoid trailing slashes which cause `//api/...` 404s.
+const rawBaseUrl = process.env.REACT_APP_API_BASE_URL || 'https://enerstore-production.up.railway.app';
+const RAILWAY_URL = rawBaseUrl.replace(/\/+$/, '');
 const API_BASE_URL = RAILWAY_URL;
 const SOCKET_URL = RAILWAY_URL;
 
